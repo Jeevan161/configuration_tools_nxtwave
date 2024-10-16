@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rename JSON's in Zip</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .file-input, .text-input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn-submit {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn-submit:hover {
+            background-color: #218838;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Rename JSON Files in Zip</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- UUID for renaming JSON files -->
+        <div class="form-group">
+            <label for="uuid_name">Enter UUID to Rename JSON Files</label>
+            <input type="text" id="uuid_name" name="uuid_name" class="text-input" placeholder="UUID for JSON files" required>
+        </div>
+
+        <!-- Output zip file name -->
+        <div class="form-group">
+            <label for="output_zip_name">Enter Output Zip File Name</label>
+            <input type="text" id="output_zip_name" name="output_zip_name" class="text-input" placeholder="Output zip file name" required>
+        </div>
+
+        <!-- File Upload Input -->
+        <div class="form-group">
+            <label for="zip_file">Select Zip File</label>
+            <input type="file" id="zip_file" name="zip_file" class="file-input" accept=".zip" required>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-submit">Upload and Rename</button>
+    </form>
+</div>
+
+</body>
+</html>
