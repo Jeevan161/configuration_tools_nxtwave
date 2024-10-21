@@ -24,6 +24,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('json_ops/', include('merger.urls')),
+    path('ds/', include('Delete_resources.urls')),
+    path('cp/', include('Coding_Practice.urls')),
     path('',views.home_view, name='home_view')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

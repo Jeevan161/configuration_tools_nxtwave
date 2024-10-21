@@ -1,0 +1,11 @@
+<form action="{% url 'submit_request' %}" method="post">
+    {% csrf_token %}
+    <label for="resource_id1">Resource ID 1:</label>
+    <input type="text" name="resource_ids" id="resource_id1" required>
+    <br>
+    <label for="resource_id2">Resource ID 2:</label>
+    <input type="text" name="resource_ids" id="resource_id2">
+    <br>
+    <!-- Add more inputs as needed -->
+    <button type="submit">Submit</button>
+</form>

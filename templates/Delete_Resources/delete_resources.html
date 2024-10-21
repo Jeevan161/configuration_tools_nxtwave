@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Resource</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0">Delete Resource</h4>
+            </div>
+            <div class="card-body">
+                <form action="{% url 'delete_resources' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="resource_id">Resource ID:</label>
+                        <input type="text" class="form-control" name="resource_id" id="resource_id" required>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Delete Resource</button>
+                </form>
+            </div>
+            <div class="card-footer text-right">
+                <a href="/" class="btn btn-secondary">Go Back</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
