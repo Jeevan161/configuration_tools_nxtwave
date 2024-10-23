@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Zip File and Details</title>
+    <style>
+        .divider {
+            width: 90%;
+            height: 2px;
+            background-color: #ccc;
+            margin-bottom: 40px;
+        }
+    </style>
     <!-- Include Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="container mt-5">
         <h2 class="text-center pb-2">CODING PRACTICE</h2>
+    </div>
+    <center>
+        <div class="divider"></div>
+    </center>
+    <div class="container mt-5">
+
+
         <div class="card">
             <div class="card-header bg-primary text-white">
                 <h4 class="mb-0">Upload Zip File and Enter Details</h4>
@@ -23,19 +40,23 @@
                     </div>
                     <div class="form-group">
                         <label for="title">Title of the Unit:</label>
-                        <input type="text" class="form-control" name="title" id="title" value="{{ form_data.title }}" required>
+                        <input type="text" class="form-control" name="title" id="title" value="{{ form_data.title }}"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="parent_id">Parent ID:</label>
-                        <input type="text" class="form-control" name="parent_id" id="parent_id" value="{{ form_data.parent_id }}" required>
+                        <input type="text" class="form-control" name="parent_id" id="parent_id"
+                            value="{{ form_data.parent_id }}" required>
                     </div>
                     <div class="form-group">
                         <label for="child_order">Child Order:</label>
-                        <input type="number" class="form-control" name="child_order" id="child_order" value="{{ form_data.child_order }}" required>
+                        <input type="number" class="form-control" name="child_order" id="child_order"
+                            value="{{ form_data.child_order }}" required>
                     </div>
                     <div class="form-group">
                         <label for="duration">Duration (in seconds):</label>
-                        <input type="number" class="form-control" name="duration" id="duration" value="{{ form_data.duration }}" required>
+                        <input type="number" class="form-control" name="duration" id="duration"
+                            value="{{ form_data.duration }}" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -60,4 +81,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
