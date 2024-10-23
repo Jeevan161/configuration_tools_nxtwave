@@ -9,12 +9,13 @@
 </head>
 <body>
     <div class="container mt-5">
+        <h2 class="text-center pb-2">HTML CODING</h2>
         <div class="card">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header bg-info text-white">
                 <h4 class="mb-0">Upload Zip File and Enter Details</h4>
             </div>
             <div class="card-body">
-                <form action="/cp/Coding_Practice" method="post" enctype="multipart/form-data">
+                <form action="{% url 'html_upload_and_prepare' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="zip_file">Upload Zip File:</label>
@@ -36,7 +37,7 @@
                         <label for="duration">Duration (in seconds):</label>
                         <input type="number" class="form-control" name="duration" id="duration" value="{{ form_data.duration }}" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-info">Submit</button>
                 </form>
 
                 <!-- Progress Display Section -->

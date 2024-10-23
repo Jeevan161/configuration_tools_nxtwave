@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 import re
 import json
 
+
 # Function to start session and login
 def start_session_and_login():
     """Initialize session and log in to the system."""
@@ -39,6 +40,7 @@ def get_csrf_token(session, url):
     csrf_token = soup.find('input', {'name': 'csrfmiddlewaretoken'})['value']
     return csrf_token
 
+
 def delete_resources_view(request):
     if request.method == "POST":
         # Process the submitted form data
@@ -47,6 +49,8 @@ def delete_resources_view(request):
         # Render the form for user input
         return render(request, 'Delete_Resources/delete_resources.html')
 # Function to submit form and get `request_id`
+
+
 def submit_request(request):
     session = start_session_and_login()
     form_url = "https://nkb-backend-ccbp-beta.earlywave.in/admin/nkb_load_data/contentloading/add/"
@@ -90,7 +94,7 @@ def submit_request(request):
     return HttpResponse("Failed to submit request.")
 
 
-def get_task_details(request, request_id, check_interval=10):
+def get_task_details(request, request_id, check_interval=8):
     """Fetch task details based on the request ID and keep checking until status is 'SUCCESS' or 'FAILED'."""
     session = start_session_and_login()  # Reuse the session
     url = f"https://nkb-backend-ccbp-beta.earlywave.in/admin/nkb_load_data/contentloading/{request_id}/change/"

@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'merger',
-    'Delete_resources'
+    'Delete_resources',
+    'htmlcoding'
 ]
 
 MIDDLEWARE = [
