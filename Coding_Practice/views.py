@@ -405,7 +405,16 @@ def submit_unlock_request(resource_id):
     return HttpResponse("Failed to submit unlock request.")
 
 
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+import time
+
+from django.shortcuts import render
+from django.http import HttpResponse
+
 def upload_and_prepare(request):
+    progress_steps = []
+
     if request.method == 'POST':
         zip_file = request.FILES['zip_file']
         title = request.POST['title']
@@ -413,16 +422,21 @@ def upload_and_prepare(request):
         child_order = int(request.POST['child_order'])
         duration = int(request.POST['duration'])
 
-        # Step 1: Rename JSON files in the zip
+        # Step 1: Setup
+        progress_steps.append("Setting up...")
+
+        # Step 2: Rename JSON files in the zip
         output_dir = "media/output"
         resource_id, modified_zip_path = rename_json_files_in_zip(zip_file, output_dir)
+        progress_steps.append("Zip file renamed.")
 
-        # Step 2: Upload the modified zip to S3 and get the file URL
+        # Step 3: Upload the modified zip to S3 and get the file URL
         set_aws_credentials()
         s3_file_url = upload_to_s3(modified_zip_path)
+        progress_steps.append("Zip file uploaded.")
 
         if s3_file_url:
-            # Step 3: Prepare JSON based on provided data
+            # Step 4: Prepare JSON based on provided data
             json_data = prepare_json(
                 resource_id=resource_id,
                 title=title,
@@ -430,12 +444,14 @@ def upload_and_prepare(request):
                 parent_id=parent_id,
                 child_order=child_order
             )
+            progress_steps.append("JSON prepared.")
 
-            # Create a spreadsheet name
+            # Step 5: Create a spreadsheet name and upload to Google Sheets
             spread_sheet_name = f"{title} - {resource_id}"
             upload_to_google_sheets(json_data, spread_sheet_name)
+            progress_steps.append("Sheet prepared.")
 
-            # Final JSON structure to send with the request
+            # Step 6: Send Sheet Loading Request
             final_json = {
                 "spread_sheet_name": spread_sheet_name,
                 "data_sets_to_be_loaded": [
@@ -447,12 +463,28 @@ def upload_and_prepare(request):
                 "is_json_converted": False
             }
             submit_sheet_loading_request(final_json)
-            time.sleep(15)
-            return submit_unlock_request(resource_id)
-
+            progress_steps.append("Sheet Loading Request sent.")
+            time.sleep(20)
+            # Step 7: Send Unlock Request
+            submit_unlock_request(resource_id)
+            progress_steps.append("Unlock Resource Request sent.")
+            progress_steps.append("Process completed successfully.")
         else:
+            progress_steps.append("Failed to upload file to S3.")
             return HttpResponse("Failed to upload file to S3.", status=500)
 
+        # Keep the form data intact
+        return render(request, 'Coding_Practice/upload_form.html', {
+            'progress_steps': progress_steps,
+            'form_data': {
+                'title': title,
+                'parent_id': parent_id,
+                'child_order': child_order,
+                'duration': duration
+            }
+        })
+
     return render(request, 'Coding_Practice/upload_form.html')
+
 
 
