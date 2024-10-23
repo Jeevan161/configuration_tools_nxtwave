@@ -464,7 +464,7 @@ def upload_and_prepare(request):
             }
             submit_sheet_loading_request(final_json)
             progress_steps.append("Sheet Loading Request sent.")
-            time.sleep(20)
+            time.sleep(30)
             # Step 7: Send Unlock Request
             submit_unlock_request(resource_id)
             progress_steps.append("Unlock Resource Request sent.")
