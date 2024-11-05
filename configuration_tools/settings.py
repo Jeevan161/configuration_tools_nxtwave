@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-WSGI_APPLICATION = 'czarny_kot.wsgi.app'
+WSGI_APPLICATION = 'configuration_tools.wsgi.app'
 
 ROOT_URLCONF = 'configuration_tools.urls'
 
